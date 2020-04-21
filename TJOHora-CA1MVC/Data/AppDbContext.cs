@@ -16,6 +16,8 @@ namespace TJOHora_CA1MVC.Data
 
         public DbSet<Game> Games { get; set; }
 
+        public DbSet<CartItem> CartItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder);
@@ -26,7 +28,8 @@ namespace TJOHora_CA1MVC.Data
                 name = "Titanfall 2",
                 developer = "Respawn Entertainment",
                 releaseDate = "28/10/2016",
-                genre = "Shooter"
+                genre = "Shooter",
+                Price = 30.50M
             });
             modelBuilder.Entity<Game>().HasData(new Game
             {
@@ -34,7 +37,8 @@ namespace TJOHora_CA1MVC.Data
                 name = "Doom",
                 developer = "Id Software",
                 releaseDate = "15/1/2016",
-                genre = "Shooter"
+                genre = "Shooter",
+                Price = 50.50M
             });
             modelBuilder.Entity<Game>().HasData(new Game
             {
@@ -42,10 +46,9 @@ namespace TJOHora_CA1MVC.Data
                 name = "Dark Souls",
                 developer = "From Software",
                 releaseDate = "10/9/2009",
-                genre = "Shooter"
+                genre = "Rpg",
+                Price = 10.99M
             });
         }
-        
-        
     }
 }

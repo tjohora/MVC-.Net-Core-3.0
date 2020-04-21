@@ -15,19 +15,49 @@
             <th scope="col">Developer</th>
             <th scope="col">Release Date</th>
             <th scope="col">Genre</th>
+            <th scope="col">Price(€)</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var game in Model.Games)
         {
-            <tr>
-                <th scope="row">@game.gameId</th>
-                <td>@game.name</td>
-                <td>@game.developer</td>
-                <td>@game.releaseDate</td>
-                <td>@game.genre</td>
-            </tr>
+        <tr>
+            <th scope="row">@game.gameId</th>
+            <td>@game.name</td>
+            <td>@game.developer</td>
+            <td>@game.releaseDate</td>
+            <td>@game.genre</td>
+            <td>@game.Price</td>
+            <td>
+                <div class="addToCart">
+                    <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToShoppingCart" asp-route-id="@game.gameId">Add to cart</a>
+                </div>
+            </td>
+            <td>
+                <a asp-controller="Game" asp-action="Edit" asp-route-id="@game.gameId">Edit</a> |
+                <a data-toggle="modal" data-target="#@game.name">Delete</a>
+                <div class="modal" id="@game.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenteredLabel">Delete Game @game.name (@game.gameId)?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <form asp-action="Delete">
+                                    <input type="hidden" asp-for="@game.gameId" />
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
-
+<a asp-controller="Game" asp-action="Create"><button type="button" class="btn btn-primary btn-lg">New Game</button></a>
